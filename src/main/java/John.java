@@ -8,11 +8,22 @@ public class John {
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
+        String[] list = new String[100];
+        int count = 0;
         while(!line.equals("bye")){
-            System.out.println(line);
+            if (line.equals("list")) {
+                for (int i = 0; i < count; i++){
+                    int num = i + 1;
+                    System.out.println(num + ". " + list[i]);
+                }
+            }
+            else {
+                list[count] = line;
+                count++;
+                System.out.println("added: " + line);
+            }
             line = in.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
-
     }
 }
