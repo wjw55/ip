@@ -1,4 +1,12 @@
+package duke;
+
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class John {
     private static Task[] Tasks = new Task[100];
