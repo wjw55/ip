@@ -9,15 +9,14 @@ import duke.task.Task;
 import duke.task.Todo;
 
 public class John {
-    private static Task[] Tasks = new Task[100];
+    private static Task[] tasks = new Task[100];
     private static int taskCount = 0;
 
     public static void addTask(Task t) {
-        Tasks[taskCount] = t;
+        tasks[taskCount] = t;
         taskCount++;
         System.out.println("Got it. I've added this task: " + System.lineSeparator() + t.toString());
         System.out.println("Now you have " + taskCount + (taskCount > 1 ? " tasks" : " task") + " in the list.");
-
     }
 
     public static void main(String[] args) throws DukeException {
@@ -37,7 +36,7 @@ public class John {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < taskCount; i++) {
                         int num = i + 1;
-                        System.out.println(num + "." + Tasks[i].toString());
+                        System.out.println(num + "." + tasks[i].toString());
                     }
                 } else if (words[0].equals("mark")) {
                     if (words.length < 2) {
@@ -47,9 +46,9 @@ public class John {
                     if (item > taskCount - 1) {
                         throw new DukeException("This task does not exist.");
                     }
-                    Tasks[item].markAsDone();
+                    tasks[item].markAsDone();
                     System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(Tasks[item]);
+                    System.out.println(tasks[item]);
                 } else if (words[0].equals("unmark")) {
                     if (words.length < 2) {
                         throw new DukeException("Please specify which task you want to unmark.");
@@ -58,9 +57,9 @@ public class John {
                     if (item > taskCount - 1) {
                         throw new DukeException("This task does not exist.");
                     }
-                    Tasks[item].markAsUndone();
+                    tasks[item].markAsUndone();
                     System.out.println("OK, I've marked this task as not done yet: ");
-                    System.out.println(Tasks[item]);
+                    System.out.println(tasks[item]);
                 } else if (words[0].equals("todo")) {
                     if (words.length < 2) {
                         throw new DukeException("OOPS! Seems like you did not enter a description for todo ;-; Please enter a todo with description");
