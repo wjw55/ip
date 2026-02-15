@@ -12,6 +12,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + "(from: " + startTime + "to: " + endTime + ")";
+        return super.toString() + "(from: " + startTime + " to: " + endTime + ")";
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return super.toSaveFormat() + " | " + this.startTime + "-" + this.endTime;
     }
 }

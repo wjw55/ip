@@ -12,6 +12,15 @@ public class Task {
         this.type = type;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+
     public String getTaskType() {
         return this.type.getLabel();
     }
@@ -30,6 +39,10 @@ public class Task {
 
     public String toString() {
         return "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + this.description;
+    }
+
+    public String toSaveFormat() {
+        return this.getTaskType() + " | " + (this.isDone ? "1" : "0") + " | " + this.description;
     }
 }
 
