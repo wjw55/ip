@@ -17,3 +17,9 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 *.class
+
+# Exclude compiled artifacts
+*.jar
+
+# Exclude local data created by John
+data/
