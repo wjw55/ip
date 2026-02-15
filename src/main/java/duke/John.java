@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
@@ -9,14 +10,12 @@ import duke.task.Task;
 import duke.task.Todo;
 
 public class John {
-    private static Task[] tasks = new Task[100];
-    private static int taskCount = 0;
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
 
-    public static void addTask(Task t) {
-        tasks[taskCount] = t;
-        taskCount++;
-        System.out.println("Got it. I've added this task: " + System.lineSeparator() + t.toString());
-        System.out.println("Now you have " + taskCount + (taskCount > 1 ? " tasks" : " task") + " in the list.");
+    public static void addTask(Task newTask) {
+        tasks.add(newTask);
+        System.out.println("Got it. I've added this task: " + System.lineSeparator() + newTask.toString());
+        System.out.println("Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks" : " task") + " in the list.");
     }
 
     public static void main(String[] args) throws DukeException {
@@ -34,32 +33,43 @@ public class John {
                 String[] words = line.split(" ");
                 if (line.equals("list")) {
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskCount; i++) {
+                    for (int i = 0; i < tasks.size(); i++) {
                         int num = i + 1;
-                        System.out.println(num + "." + tasks[i].toString());
+                        System.out.println(num + "." + tasks.get(i).toString());
                     }
                 } else if (words[0].equals("mark")) {
                     if (words.length < 2) {
                         throw new DukeException("Please specify which task you want to mark.");
                     }
                     int item = Integer.parseInt(words[1]) - 1;
-                    if (item > taskCount - 1) {
+                    if (item > tasks.size() - 1) {
                         throw new DukeException("This task does not exist.");
                     }
-                    tasks[item].markAsDone();
+                    tasks.get(item).markAsDone();
                     System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(tasks[item]);
+                    System.out.println(tasks.get(item));
+                } else if (words[0].equals("delete")) {
+                    if (words.length < 2) {
+                        throw new DukeException("Please specify which task you want to delete.");
+                    }
+                    int item = Integer.parseInt(words[1]) - 1;
+                    if (item > tasks.size() - 1) {
+                        throw new DukeException("This task does not exist.");
+                    }
+                    System.out.println("Noted. I've removed this task:" + System.lineSeparator() + tasks.get(item));
+                    tasks.remove(item);
+                    System.out.println("Now you have " + tasks.size() + " in the list.");
                 } else if (words[0].equals("unmark")) {
                     if (words.length < 2) {
                         throw new DukeException("Please specify which task you want to unmark.");
                     }
                     int item = Integer.parseInt(words[1]) - 1;
-                    if (item > taskCount - 1) {
+                    if (item > tasks.size() - 1) {
                         throw new DukeException("This task does not exist.");
                     }
-                    tasks[item].markAsUndone();
+                    tasks.get(item).markAsUndone();
                     System.out.println("OK, I've marked this task as not done yet: ");
-                    System.out.println(tasks[item]);
+                    System.out.println(tasks.get(item));
                 } else if (words[0].equals("todo")) {
                     if (words.length < 2) {
                         throw new DukeException("OOPS! Seems like you did not enter a description for todo ;-; Please enter a todo with description");
