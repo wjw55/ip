@@ -1,2 +1,2 @@
 T | 0 | read
-E | 0 | sleep | 3pm-4pm
+D | 0 | sdfaf | 7pm
