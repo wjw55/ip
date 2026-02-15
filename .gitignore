@@ -23,3 +23,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Exclude local data created by John
 data/
+src/main/java/META-INF/MANIFEST.MF
