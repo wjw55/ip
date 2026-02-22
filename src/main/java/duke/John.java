@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,7 +8,9 @@ import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskType;
 import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,10 +45,47 @@ public class John {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void Load() throws IOException {
+        File f = new File(FILE_PATH);
+        if (!f.exists()) {
+            return;
+        }
+        try (Scanner s = new Scanner(f)) {
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] parts = line.split("\\|");
+                String type = parts[0].trim();
+                boolean isDone = parts[1].trim().equals("1");
+                String description = parts[2].trim();
+                Task newTask = null;
+                switch (type) {
+                case "T":
+                    newTask = new Todo(description);
+                    break;
+                case "D":
+                    newTask = new Deadline(description, parts[3].trim());
+                    break;
+                case "E":
+                    String[] duration = parts[3].split("-");
+                    newTask = new Event(description, duration[0].trim(), duration[1].trim());
+                    break;
+                }
+
+                if (newTask != null) {
+                    if (isDone) {
+                        newTask.markAsDone();
+                    }
+                    tasks.add(newTask);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws DukeException, IOException {
         String name = "John";
         System.out.println("Hello! I'm " + name);
         System.out.println("What can I do for you?");
+        Load();
         String line;
         Scanner in = new Scanner(System.in);
         while (in.hasNextLine()) {
