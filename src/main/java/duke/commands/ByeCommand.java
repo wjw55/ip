@@ -1,5 +1,7 @@
 package duke.commands;
 
+import static duke.common.Messages.MESSAGE_TASK_DOES_NOT_EXIST;
+
 import java.io.IOException;
 
 import duke.storage.Storage;
@@ -10,7 +12,7 @@ public class ByeCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        ui.showMessage("Bye. Hope to see you again soon!");
+        ui.showMessage(MESSAGE_TASK_DOES_NOT_EXIST);
     }
 
     @Override

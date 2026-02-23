@@ -20,6 +20,6 @@ public class TodoCommand extends Command {
         Task task = new Todo(descripton);
         tasks.addTask(task);
         storage.Save(tasks);
-        ui.showAutoMessage(tasks.size(), task);
+        ui.showAddMessage(tasks.size(), task);
     }
 }

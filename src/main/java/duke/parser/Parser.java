@@ -1,5 +1,13 @@
 package duke.parser;
 
+import static duke.common.Messages.MESSAGE_INVALID_DEADLINE_FORMAT;
+import static duke.common.Messages.MESSAGE_INVALID_DELETE;
+import static duke.common.Messages.MESSAGE_INVALID_EVENT_FORMAT;
+import static duke.common.Messages.MESSAGE_INVALID_INPUT;
+import static duke.common.Messages.MESSAGE_INVALID_MARK;
+import static duke.common.Messages.MESSAGE_INVALID_TODO_FORMAT;
+import static duke.common.Messages.MESSAGE_INVALID_UNMARK;
+
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
@@ -33,17 +41,14 @@ public class Parser {
             return parseUnmark(words);
         case "bye":
             return new ByeCommand();
-
         default:
-            throw new DukeException("OOPS! Sorry I don't understand this :(");
+            throw new DukeException(MESSAGE_INVALID_INPUT);
         }
-
-
     }
 
     public static Command parseTodo(String fullCommand) throws DukeException {
         if (fullCommand.length() < 5) {
-            throw new DukeException("OOPS! Seems like you did not enter a description for todo ;-; Please enter a todo with description");
+            throw new DukeException(MESSAGE_INVALID_TODO_FORMAT);
         }
         int firstSpace = fullCommand.indexOf(" ");
         String description = fullCommand.substring(firstSpace + 1);
@@ -54,7 +59,7 @@ public class Parser {
     public static Command parseDeadline(String fullCommand) throws DukeException {
         int firstSpace = fullCommand.indexOf(" ");
         if (!fullCommand.contains("/by ")) {
-            throw new DukeException("Please enter deadline in the correct format (with /by).");
+            throw new DukeException(MESSAGE_INVALID_DEADLINE_FORMAT);
         }
         int byIndex = fullCommand.indexOf("/by ");
         String description = fullCommand.substring(firstSpace + 1, byIndex - 1);
@@ -65,7 +70,7 @@ public class Parser {
     public static Command parseEvent(String fullCommand) throws DukeException {
         int firstSpace = fullCommand.indexOf(" ");
         if (!fullCommand.contains("/from") || (!fullCommand.contains("/to"))) {
-            throw new DukeException("Please enter event in the correct format (with /from and /to).");
+            throw new DukeException(MESSAGE_INVALID_EVENT_FORMAT);
         }
         int fromIndex = fullCommand.indexOf("/from");
         int toIndex = fullCommand.indexOf("/to");
@@ -77,7 +82,7 @@ public class Parser {
 
     public static Command parseDelete(String[] words) throws DukeException{
         if (words.length < 2) {
-            throw new DukeException("Please specify which task you want to delete.");
+            throw new DukeException(MESSAGE_INVALID_DELETE);
         }
         int item = Integer.parseInt(words[1]) - 1;
         return new DeleteCommand(item);
@@ -85,7 +90,7 @@ public class Parser {
 
     public static Command parseMark(String[] words) throws DukeException{
         if (words.length < 2) {
-            throw new DukeException("Please specify which task you want to mark.");
+            throw new DukeException(MESSAGE_INVALID_MARK);
         }
         int item = Integer.parseInt(words[1]) - 1;
         return new MarkCommand(item);
@@ -93,7 +98,7 @@ public class Parser {
 
     public static Command parseUnmark(String[] words) throws DukeException{
         if (words.length < 2) {
-            throw new DukeException("Please specify which task you want to unmark.");
+            throw new DukeException(MESSAGE_INVALID_UNMARK);
         }
         int item = Integer.parseInt(words[1]) - 1;
         return new UnmarkCommand(item);

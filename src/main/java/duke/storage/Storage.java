@@ -11,9 +11,11 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.ui.Ui;
 
 public class Storage {
     private final String filepath;
+    private final Ui ui = new Ui();
 
     public Storage(String filePath) {
         this.filepath = filePath;
@@ -33,7 +35,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            ui.showMessage("Something went wrong: " + e.getMessage());
         }
     }
 
@@ -63,7 +65,6 @@ public class Storage {
                     newTask = new Event(description, duration[0].trim(), duration[1].trim());
                     break;
                 }
-
                 if (newTask != null) {
                     if (isDone) {
                         newTask.markAsDone();
