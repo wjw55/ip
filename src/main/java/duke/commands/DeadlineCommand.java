@@ -22,7 +22,7 @@ public class DeadlineCommand extends Command {
         Task task = new Deadline(description, by);
         tasks.addTask(task);
         storage.Save(tasks);
-        ui.showAutoMessage(tasks.size(), task);
+        ui.showAddMessage(tasks.size(), task);
     }
 
 }

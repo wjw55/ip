@@ -24,7 +24,7 @@ public class EventCommand extends Command{
         Task task = new Event(description, from, to);
         tasks.addTask(task);
         storage.Save(tasks);
-        ui.showAutoMessage(tasks.size(), task);
+        ui.showAddMessage(tasks.size(), task);
     }
 
 }

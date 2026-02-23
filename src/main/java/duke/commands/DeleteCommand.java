@@ -1,8 +1,11 @@
 package duke.commands;
 
+import static duke.common.Messages.MESSAGE_TASK_DOES_NOT_EXIST;
+
 import java.io.IOException;
 
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.exception.DukeException;
@@ -17,11 +20,11 @@ public class DeleteCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (item > tasks.size() - 1) {
-            throw new DukeException("This task does not exist.");
+            throw new DukeException(MESSAGE_TASK_DOES_NOT_EXIST);
         }
-        ui.showMessage("Noted. I've removed this task:" + System.lineSeparator() + tasks.get(item));
+        Task task = tasks.get(item);
         tasks.remove(item);
-        ui.showMessage("Now you have " + tasks.size() + " in the list.");
+        ui.showDeleteMessage(tasks.size(), task);
         storage.Save(tasks);
     }
 }
