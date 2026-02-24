@@ -3,6 +3,7 @@ package duke.parser;
 import static duke.common.Messages.MESSAGE_INVALID_DEADLINE_FORMAT;
 import static duke.common.Messages.MESSAGE_INVALID_DELETE;
 import static duke.common.Messages.MESSAGE_INVALID_EVENT_FORMAT;
+import static duke.common.Messages.MESSAGE_INVALID_FIND;
 import static duke.common.Messages.MESSAGE_INVALID_INPUT;
 import static duke.common.Messages.MESSAGE_INVALID_MARK;
 import static duke.common.Messages.MESSAGE_INVALID_TODO_FORMAT;
@@ -17,6 +18,7 @@ import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
@@ -45,6 +47,8 @@ public class Parser {
             return parseUnmark(words);
         case "bye":
             return new ByeCommand();
+        case "find":
+            return parseFind(words);
         default:
             throw new DukeException(MESSAGE_INVALID_INPUT);
         }
@@ -112,6 +116,14 @@ public class Parser {
         }
         int item = Integer.parseInt(words[1]) - 1;
         return new UnmarkCommand(item);
+    }
+
+    public static Command parseFind(String[] words) throws DukeException {
+        if (words.length < 2) {
+            throw new DukeException(MESSAGE_INVALID_FIND);
+        }
+        String item = words[1].trim();
+        return new FindCommand(item);
     }
 
 }
