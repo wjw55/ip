@@ -3,6 +3,8 @@ package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -58,7 +60,8 @@ public class Storage {
                     newTask = new Todo(description);
                     break;
                 case "D":
-                    newTask = new Deadline(description, parts[3].trim());
+                    LocalDateTime by = LocalDateTime.parse(parts[3].trim());
+                    newTask = new Deadline(description, by);
                     break;
                 case "E":
                     String[] duration = parts[3].split("-");
