@@ -8,6 +8,10 @@ import static duke.common.Messages.MESSAGE_INVALID_MARK;
 import static duke.common.Messages.MESSAGE_INVALID_TODO_FORMAT;
 import static duke.common.Messages.MESSAGE_INVALID_UNMARK;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
@@ -57,14 +61,20 @@ public class Parser {
     }
 
     public static Command parseDeadline(String fullCommand) throws DukeException {
-        int firstSpace = fullCommand.indexOf(" ");
-        if (!fullCommand.contains("/by ")) {
-            throw new DukeException(MESSAGE_INVALID_DEADLINE_FORMAT);
+        try {
+            int firstSpace = fullCommand.indexOf(" ");
+            if (!fullCommand.contains("/by ")) {
+                throw new DukeException(MESSAGE_INVALID_DEADLINE_FORMAT);
+            }
+            int byIndex = fullCommand.indexOf("/by ");
+            String description = fullCommand.substring(firstSpace + 1, byIndex - 1);
+            String dateString = fullCommand.substring(byIndex + "/by ".length()).trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            LocalDateTime by = LocalDateTime.parse(dateString, formatter);
+            return new DeadlineCommand(description, by);
+        } catch (DateTimeException e) {
+            throw new DukeException("Invalid date format. Use /by dd/MM/yyyy HHmm");
         }
-        int byIndex = fullCommand.indexOf("/by ");
-        String description = fullCommand.substring(firstSpace + 1, byIndex - 1);
-        String by = fullCommand.substring(byIndex + 1).replace("by ", "");
-        return new DeadlineCommand(description, by);
     }
 
     public static Command parseEvent(String fullCommand) throws DukeException {
@@ -80,7 +90,7 @@ public class Parser {
         return new EventCommand(description, from, to);
     }
 
-    public static Command parseDelete(String[] words) throws DukeException{
+    public static Command parseDelete(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_DELETE);
         }
@@ -88,7 +98,7 @@ public class Parser {
         return new DeleteCommand(item);
     }
 
-    public static Command parseMark(String[] words) throws DukeException{
+    public static Command parseMark(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_MARK);
         }
@@ -96,7 +106,7 @@ public class Parser {
         return new MarkCommand(item);
     }
 
-    public static Command parseUnmark(String[] words) throws DukeException{
+    public static Command parseUnmark(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_UNMARK);
         }

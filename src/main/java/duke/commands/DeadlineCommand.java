@@ -1,6 +1,7 @@
 package duke.commands;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -10,9 +11,9 @@ import duke.task.Task;
 
 public class DeadlineCommand extends Command {
     private String description;
-    private String by;
+    private LocalDateTime by;
 
-    public DeadlineCommand(String description, String by) {
+    public DeadlineCommand(String description, LocalDateTime by) {
         this.description = description;
         this.by = by;
     }
