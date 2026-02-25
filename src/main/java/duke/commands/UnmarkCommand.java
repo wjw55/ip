@@ -10,13 +10,31 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 
+/**
+ * Represents the command that unmarks a task that is not done
+ *
+ * When executed, it marks the specific task
+ * and uses a message to signal the user that the task is unmarked.
+ */
 public class UnmarkCommand extends Command{
     private int item;
 
+    /**
+     * Public construction of the class
+     * @param item
+     */
     public UnmarkCommand(int item) {
         this.item = item;
     }
 
+    /**
+     * Unmark the specific task and display message to notify user
+     * @param tasks   The task list containing all current tasks.
+     * @param ui      The user interface used to display messages.
+     * @param storage The storage handler used for saving tasks.
+     * @throws IOException If an I/O error occurs.
+     * @throws DukeException If a command-related error occurs.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (item > tasks.size() - 1) {
             throw new DukeException(MESSAGE_TASK_DOES_NOT_EXIST);
