@@ -25,8 +25,28 @@ import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
 import duke.exception.DukeException;
 
+/**
+ * Responsible for interpreting user input and converting it
+ * into executable Command objects.
+ *
+ * This class parses raw input strings, validates command formats,
+ * and delegates the creation of specific Command subclasses.
+ *
+ * If the input format is invalid, a DukeException is thrown.
+ */
 public class Parser {
 
+    /**
+     * Parses a full user input string and returns the corresponding Command.
+     *
+     * The first word of the input determines the command type.
+     * The remaining input is validated and delegated to
+     * specialized parsing methods.
+     *
+     * @param fullCommand The raw input entered by the user.
+     * @return A Command object representing the user's request.
+     * @throws DukeException If the input is invalid or improperly formatted.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] words = fullCommand.split(" ");
 
@@ -54,6 +74,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a todo command from the given input string.
+     *
+     * Extracts the task description and creates a TodoCommand.
+     *
+     * @param fullCommand The full input string.
+     * @return A TodoCommand containing the extracted description.
+     * @throws DukeException If the todo format is invalid.
+     */
     public static Command parseTodo(String fullCommand) throws DukeException {
         if (fullCommand.length() < 5) {
             throw new DukeException(MESSAGE_INVALID_TODO_FORMAT);
@@ -64,6 +93,20 @@ public class Parser {
         return new TodoCommand(description);
     }
 
+    /**
+     * Parses a deadline command from the given input string.
+     *
+     * Extracts the task description and due date, converts the
+     * date string into a LocalDateTime object, and returns
+     * a DeadlineCommand.
+     *
+     * Expected format:
+     * deadline <description> /by dd/MM/yyyy HHmm
+     *
+     * @param fullCommand The full input string.
+     * @return A DeadlineCommand containing the parsed data.
+     * @throws DukeException If the format is invalid or the date cannot be parsed.
+     */
     public static Command parseDeadline(String fullCommand) throws DukeException {
         try {
             int firstSpace = fullCommand.indexOf(" ");
@@ -81,6 +124,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an event command from the given input string.
+     *
+     * Extracts the description, start time, and end time,
+     * and returns an EventCommand.
+     *
+     * Expected format:
+     * event <description> /from <start> /to <end>
+     *
+     * @param fullCommand The full input string.
+     * @return An EventCommand containing the parsed data.
+     * @throws DukeException If the format is invalid.
+     */
     public static Command parseEvent(String fullCommand) throws DukeException {
         int firstSpace = fullCommand.indexOf(" ");
         if (!fullCommand.contains("/from") || (!fullCommand.contains("/to"))) {
@@ -94,6 +150,15 @@ public class Parser {
         return new EventCommand(description, from, to);
     }
 
+    /**
+     * Parses a delete command.
+     *
+     * Extracts the task index and converts it to zero-based indexing.
+     *
+     * @param words The split input array.
+     * @return A DeleteCommand with the specified index.
+     * @throws DukeException If the input format is invalid.
+     */
     public static Command parseDelete(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_DELETE);
@@ -102,6 +167,15 @@ public class Parser {
         return new DeleteCommand(item);
     }
 
+    /**
+     * Parses a mark command.
+     *
+     * Extracts the task index and converts it to zero-based indexing.
+     *
+     * @param words The split input array.
+     * @return A DeleteCommand with the specified index.
+     * @throws DukeException If the input format is invalid.
+     */
     public static Command parseMark(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_MARK);
@@ -110,6 +184,15 @@ public class Parser {
         return new MarkCommand(item);
     }
 
+    /**
+     * Parses a unmark command.
+     *
+     * Extracts the task index and converts it to zero-based indexing.
+     *
+     * @param words The split input array.
+     * @return A DeleteCommand with the specified index.
+     * @throws DukeException If the input format is invalid.
+     */
     public static Command parseUnmark(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_UNMARK);
@@ -118,6 +201,15 @@ public class Parser {
         return new UnmarkCommand(item);
     }
 
+    /**
+     * Parses a find command.
+     *
+     * Extracts the search keyword and returns a FindCommand.
+     *
+     * @param words The split input array.
+     * @return A FindCommand with the specified keyword.
+     * @throws DukeException If the input format is invalid.
+     */
     public static Command parseFind(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_FIND);

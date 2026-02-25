@@ -15,14 +15,35 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * Handles loading and saving of tasks to a file.
+ *
+ * This class is responsible for file I/O operations and
+ * converting between in-memory Task objects and their
+ * stored string representations.
+ */
 public class Storage {
     private final String filepath;
     private final Ui ui = new Ui();
 
+    /**
+     * Constructs a Storage object with the specified file path.
+     *
+     * @param filePath The path of the file used to store task data.
+     */
     public Storage(String filePath) {
         this.filepath = filePath;
     }
 
+    /**
+     * Saves the current task list to the storage file.
+     *
+     * Each task is written in a specific save format so that
+     * it can later be reconstructed when loading.
+     *
+     * @param tasks The task list to be saved.
+     * @throws IOException If an I/O error occurs during writing.
+     */
     public void Save(TaskList tasks) throws IOException {
         try {
             File f = new File(this.filepath);
@@ -41,6 +62,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the storage file.
+     *
+     * Reads each line from the file, reconstructs the corresponding
+     * Task object based on its stored type, and returns a list of tasks.
+     *
+     * If the file does not exist, an empty task list is returned.
+     *
+     * @return An ArrayList of Task objects loaded from the file.
+     * @throws IOException If an I/O error occurs during reading.
+     */
     public ArrayList<Task> Load() throws IOException {
         File f = new File(this.filepath);
         ArrayList<Task> tasks = new ArrayList<>();
