@@ -51,40 +51,42 @@ Welcome to **John**, your personal task manager chatbot! John helps you manage t
       ```
 
 2. **List Tasks**
+- ```
+   list
+  ```
 
-list
-
-Shows all tasks currently in your list with their status (done/not done).
+- Shows all tasks currently in your list with their status (done/not done).
 
 3. **Mark Tasks as Done**
-
-mark <task number>
+-  ```
+   mark <task number>
+   ```
 
 Marks a task as completed.
 
-4**Unmark Tasks as not Done**
-
-unmark <task number>
-
+4. **Unmark Tasks as not Done**
+-  ```
+   unmark <task number>
+   ```
 Unmarks a task as not completed.
 
 4. **Delete Tasks**
-
-delete <task number>
-
-Removes a task from the list.
+-  ```
+   delete <task number>
+   ```
+- Removes a task from the list.
 
 5. **Find Tasks**
-
-find <keyword>
-
-Searches your task list for tasks containing the keyword.
+-  ```
+   find <keyword>
+   ```
+- Searches your task list for tasks containing the keyword.
 
 6. **Exit John**
-
-bye
-
-Exits the chatbot with a goodbye message.
+-  ```
+   bye
+   ```
+- Exits the chatbot with a goodbye message.
 
 ---
 
@@ -120,15 +122,16 @@ Exits the chatbot with a goodbye message.
 
 ## Example Session
 
-
-todo read book
-deadline return book /by 2019-12-02
-event team meeting /from 5pm /to 6pm
-list
-mark 1
-delete 2
-find meeting
-bye
+- ```
+   todo read book
+   deadline return book /by 2019-12-02
+   event team meeting /from 5pm /to 6pm
+   list
+   mark 1
+   delete 2
+   find meeting
+   bye
+   ```
 
 
 ---
