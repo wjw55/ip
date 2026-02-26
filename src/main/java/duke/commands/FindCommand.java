@@ -1,6 +1,7 @@
 package duke.commands;
 
 import static duke.common.Messages.MESSAGE_FIND;
+import static duke.common.Messages.MESSAGE_NO_MATCHING_TASK;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,11 +44,19 @@ public class FindCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         ArrayList<Task> taskArrayList = tasks.getTasks();
-        ui.showMessage(MESSAGE_FIND);
+        ArrayList<Task> matchingList = new ArrayList<Task>();
         for (Task task : taskArrayList) {
             String description = task.getDescription();
-            if (description.contains(item)){
-                ui.showMessage(task.toString());
+            if (description.contains(item)) {
+                matchingList.add(task);
+            }
+        }
+        if (matchingList.isEmpty()) {
+            ui.showMessage(MESSAGE_NO_MATCHING_TASK);
+        } else {
+            ui.showMessage(MESSAGE_FIND);
+            for (Task task : matchingList) {
+                ui.showMessage(matchingList.indexOf(task) + 1 + ". " + task.toString());
             }
         }
     }

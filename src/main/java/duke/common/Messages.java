@@ -3,7 +3,12 @@ package duke.common;
 public class Messages {
     public static final String LS = System.lineSeparator();
     public static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
-    public static final String MESSAGE_WELCOME = "Hello! I'm John" + LS + "What can I do for you?";
+    public static final String MESSAGE_WELCOME = "Hello! I'm John" + LS
+            +"     _       _             " + LS +
+                    "    | | ___ | |__  _ __    " + LS +
+                    " _  | |/ _ \\| '_ \\| '_ \\   " + LS +
+                    "| |_| | (_) | | | | | | |  " + LS +
+                    " \\___/ \\___/|_| |_|_| |_|  " + LS + LS + "What can I do for you?";
     public static final String MESSAGE_ADD = "Got it. I've added this task: ";
     public static final String MESSAGE_DELETE = "Noted. I've removed this task: ";
     public static final String MESSAGE_TASK_DOES_NOT_EXIST = "This task does not exist.";
@@ -19,4 +24,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_MARK = "Please specify which task you want to mark.";
     public static final String MESSAGE_INVALID_UNMARK = "Please specify which task you want to unmark.";
     public static final String MESSAGE_INVALID_FIND = "Please specify which task you want to find.";
+    public static final String MESSAGE_NO_MATCHING_TASK = "This is no matching task in your list.";
 }
