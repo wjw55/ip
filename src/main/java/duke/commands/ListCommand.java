@@ -1,6 +1,7 @@
 package duke.commands;
 
 import static duke.common.Messages.MESSAGE_LIST;
+import static duke.common.Messages.MESSAGE_NO_TASK;
 
 import java.io.IOException;
 
@@ -30,10 +31,14 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        ui.showMessage(MESSAGE_LIST);
-        for (int i = 0; i < tasks.size(); i++) {
-            int num = i + 1;
-            ui.showMessage(num + "." + tasks.get(i).toString());
+        if (tasks.size() == 0) {
+            ui.showMessage(MESSAGE_NO_TASK);
+        } else {
+            ui.showMessage(MESSAGE_LIST);
+            for (int i = 0; i < tasks.size(); i++) {
+                int num = i + 1;
+                ui.showMessage(num + "." + tasks.get(i).toString());
+            }
         }
     }
 }

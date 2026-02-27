@@ -25,4 +25,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_UNMARK = "Please specify which task you want to unmark.";
     public static final String MESSAGE_INVALID_FIND = "Please specify which task you want to find.";
     public static final String MESSAGE_NO_MATCHING_TASK = "This is no matching task in your list.";
+    public static final String MESSAGE_NO_TASK = "There is currently no task in your list.";
 }
