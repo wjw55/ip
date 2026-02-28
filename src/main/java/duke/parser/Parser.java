@@ -138,15 +138,26 @@ public class Parser {
      * @throws DukeException If the format is invalid.
      */
     public static Command parseEvent(String fullCommand) throws DukeException {
-        int firstSpace = fullCommand.indexOf(" ");
         if (!fullCommand.contains("/from") || (!fullCommand.contains("/to"))) {
             throw new DukeException(MESSAGE_INVALID_EVENT_FORMAT);
         }
+
+        int firstSpace = fullCommand.indexOf(" ");
         int fromIndex = fullCommand.indexOf("/from");
         int toIndex = fullCommand.indexOf("/to");
-        String description = fullCommand.substring(firstSpace + 1, fromIndex - 1);
-        String from = fullCommand.substring(fromIndex + 1, toIndex - 1).replace("from ", "");
-        String to = fullCommand.substring(toIndex + 1).replace("to ", "");
+
+        if (firstSpace == -1 || fromIndex == -1 || toIndex == -1 || fromIndex > toIndex) {
+            throw new DukeException(MESSAGE_INVALID_EVENT_FORMAT);
+        }
+
+        String description = fullCommand.substring(firstSpace + 1, fromIndex).trim();
+        String from = fullCommand.substring(fromIndex + 5, toIndex).trim();
+        String to = fullCommand.substring(toIndex + 3).trim();
+
+        if (description.isEmpty() || from.isEmpty() || to.isEmpty()) {
+            throw new DukeException(MESSAGE_INVALID_EVENT_FORMAT);
+        }
+
         return new EventCommand(description, from, to);
     }
 
