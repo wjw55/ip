@@ -4,19 +4,20 @@ Welcome to **John**, your personal task manager chatbot! John helps you manage t
 
 ---
 
-## Quick Command Reference
+## Quick Start
 
-| Command    | Description                           | Example                                |
-|------------|---------------------------------------|----------------------------------------|
-| `todo`     | Add a task without a deadline         | `todo read book`                       |
-| `deadline` | Add a task with a deadline            | `deadline return book /by 2019-12-02`  |
-| `event`    | Add a task for an event with duration | `event team meeting /from 6pm /to 8pm` |
-| `list`     | List all tasks                        | `list`                                 |
-| `mark`     | Mark a task as done                   | `mark 1`                               |
-| `unmark`   | Unmark a task as not done             | `unmark 2`                             |
-| `delete`   | Delete a task                         | `delete 2`                             |
-| `find`     | Search tasks by keyword               | `find meeting`                         |
-| `bye`      | Exit John                             | `bye`                                  |
+1. Ensure you have Java 17 or above installed in your Computer.
+   Mac users: Ensure you have the precise JDK version prescribed here.
+
+2. Download the latest .jar file.
+
+3. Copy the file to the folder you want to use as the home folder for your John Chatbot.
+
+4. Open a command terminal, *cd* into the folder you put the jar file in, and use the *java -jar ip.jar* command to run the application. 
+
+5. Type the command in the command box and press Enter to execute it.
+
+6. Refer to features below for details of each command.
 
 ---
 
@@ -136,4 +137,19 @@ Unmarks a task as not completed.
 
 ---
 
+## Quick Command Reference
+
+| Command    | Description                           | Example                                |
+|------------|---------------------------------------|----------------------------------------|
+| `todo`     | Add a task without a deadline         | `todo read book`                       |
+| `deadline` | Add a task with a deadline            | `deadline return book /by 2019-12-02`  |
+| `event`    | Add a task for an event with duration | `event team meeting /from 6pm /to 8pm` |
+| `list`     | List all tasks                        | `list`                                 |
+| `mark`     | Mark a task as done                   | `mark 1`                               |
+| `unmark`   | Unmark a task as not done             | `unmark 2`                             |
+| `delete`   | Delete a task                         | `delete 2`                             |
+| `find`     | Search tasks by keyword               | `find meeting`                         |
+| `bye`      | Exit John                             | `bye`                                  |
+
+---
 Enjoy using **John** to manage your tasks efficiently! 🎉
