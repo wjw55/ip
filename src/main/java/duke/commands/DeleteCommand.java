@@ -44,7 +44,7 @@ public class DeleteCommand extends Command{
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
-        if (item > tasks.size() - 1 || item <= 0) {
+        if (item > tasks.size() - 1 || item < 0) {
             throw new DukeException(MESSAGE_TASK_DOES_NOT_EXIST);
         }
         Task task = tasks.get(item);

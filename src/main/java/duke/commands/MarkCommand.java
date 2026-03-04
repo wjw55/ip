@@ -37,7 +37,7 @@ public class MarkCommand extends Command{
      * @throws DukeException If a command-related error occurs.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
-        if (item > tasks.size() - 1 || item <= 0) {
+        if (item > tasks.size() - 1 || item < 0) {
             throw new DukeException(MESSAGE_TASK_DOES_NOT_EXIST);
         }
         tasks.get(item).markAsDone();
