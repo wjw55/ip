@@ -174,8 +174,12 @@ public class Parser {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_DELETE);
         }
-        int item = Integer.parseInt(words[1]) - 1;
-        return new DeleteCommand(item);
+        try {
+            int item = Integer.parseInt(words[1]) - 1;
+            return new DeleteCommand(item);
+        } catch (NumberFormatException e) {
+            throw new DukeException(MESSAGE_INVALID_DELETE);
+        }
     }
 
     /**
@@ -191,8 +195,12 @@ public class Parser {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_MARK);
         }
-        int item = Integer.parseInt(words[1]) - 1;
-        return new MarkCommand(item);
+        try {
+            int item = Integer.parseInt(words[1]) - 1;
+            return new MarkCommand(item);
+        } catch (NumberFormatException e) {
+            throw new DukeException(MESSAGE_INVALID_MARK);
+        }
     }
 
     /**
@@ -208,8 +216,12 @@ public class Parser {
         if (words.length < 2) {
             throw new DukeException(MESSAGE_INVALID_UNMARK);
         }
-        int item = Integer.parseInt(words[1]) - 1;
-        return new UnmarkCommand(item);
+        try {
+            int item = Integer.parseInt(words[1]) - 1;
+            return new UnmarkCommand(item);
+        } catch (NumberFormatException e) {
+            throw new DukeException(MESSAGE_INVALID_UNMARK);
+        }
     }
 
     /**
