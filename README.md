@@ -1,19 +1,61 @@
-# John project template
+# John Chatbot
 
-This is a project template for a greenfield Java project. Given below are instructions on how to use it.
+**John** is a simple command-line task manager that helps you organize **todos, deadlines, and events** quickly using text commands.
+It is lightweight, fast, and designed to make task management easy directly from the terminal.
 
-## Setting up in Intellij
+---
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+## Features
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/John.java` file, right-click it, and choose `Run John.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
+* Add **Todo**, **Deadline**, and **Event** tasks
+* Mark and unmark tasks as completed
+* Delete tasks from your list
+* Search tasks using keywords
+* Automatically saves tasks between sessions
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+---
+
+## Getting Started
+
+### Prerequisites
+
+* **Java 17 or above**
+* A command terminal
+
+### Running John
+
+1. Download the latest `John.jar`.
+2. Copy the `.jar` file into a folder you want to use as the home directory for John.
+3. Open a terminal and navigate to that folder.
+4. Run the following command:
+
+```
+java -jar John.jar
+```
+
+5. Start entering commands to manage your tasks.
+
+---
+
+## Example Commands
+
+```
+todo read book
+deadline return book /by 2026-03-10 1800
+event team meeting /from 5pm /to 6pm
+list
+mark 1
+delete 2
+find meeting
+bye
+```
+
+---
+
+## Documentation
+
+For the full list of commands and detailed usage instructions, please refer to the **User Guide**.
+
+---
+
+Enjoy using **John** to manage your tasks efficiently!
