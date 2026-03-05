@@ -24,7 +24,7 @@ Welcome to **John**, your personal task manager chatbot! John helps you manage t
 ## Example Session
 Below is the main interface of John:
 
-![John Chatbot Interface](docs/images/john-ui.png)
+![John Chatbot Interface](images/john-ui.png)
 
 ---
 
