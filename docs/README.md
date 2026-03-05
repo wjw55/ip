@@ -21,6 +21,13 @@ Welcome to **John**, your personal task manager chatbot! John helps you manage t
 
 ---
 
+## Example Session
+Below is the main interface of John:
+
+![John Chatbot Interface](docs/images/john-ui.png)
+
+---
+
 ## Features
 
 1. **Add Tasks**
@@ -118,22 +125,6 @@ Unmarks a task as not completed.
 - **Date Format:** Always use `yyyy-MM-dd` for dates. For events with time, use `yyyy-MM-dd HHmm`.
 - **Task Numbers:** The number used in `done` or `delete` commands corresponds to the number shown in `list`.
 - **Storage:** All tasks are saved automatically. You can restart John and your task list will persist.
-
----
-
-## Example Session
-
-- ```
-   todo read book
-   deadline return book /by 2019-12-02
-   event team meeting /from 5pm /to 6pm
-   list
-   mark 1
-   delete 2
-   find meeting
-   bye
-   ```
-
 
 ---
 
